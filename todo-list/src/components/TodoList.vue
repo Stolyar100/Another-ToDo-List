@@ -20,6 +20,7 @@
             v-else
             @blur="doneEdit(todo)"
             @keyup.enter="doneEdit(todo)"
+            @keyup.esc="cancelEdit(todo)"
             v-focus
             class="todo-item-edit"
             type="text"
@@ -80,11 +81,17 @@ export default {
     },
 
     editTodo(todo) {
+      this.beforeEditCache = todo.title
       todo.editing = true;
     },
 
     doneEdit(todo) {
       todo.editing = false;
+    },
+
+    cancelEdit(todo) {
+      todo.title = this.beforeEditCache
+      todo.editing = false
     }
   },
   directives: {
