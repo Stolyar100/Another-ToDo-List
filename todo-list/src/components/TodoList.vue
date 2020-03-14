@@ -11,11 +11,13 @@
     <div class="todo-list">
       <div v-for="(todo, index) in todos" :key="todo.id" class="todo-item">
         <div class="todo-item-left">
+          <input type="checkbox" v-model="todo.completed">
           <div
             v-if="!todo.editing"
             @dblclick="editTodo(todo)"
             class="todo-item-label"
-          >{{ todo.title}}</div>
+            :class="{ completed : todo.completed }"
+          >{{ todo.title }}</div>
           <input
             v-else
             @blur="doneEdit(todo)"
@@ -163,5 +165,10 @@ export default {
 
 .todo-item-edit:focus {
   outline: 0;
+}
+
+.completed {
+  text-decoration: line-through;
+   color: grey;
 }
 </style>
