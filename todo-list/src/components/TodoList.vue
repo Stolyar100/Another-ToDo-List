@@ -42,6 +42,7 @@ export default {
     return {
       newTodo: "",
       idForTodo: 3,
+      beforeEditCache: '',
       todos: [
         {
           id: 1,
@@ -86,7 +87,10 @@ export default {
     },
 
     doneEdit(todo) {
-      todo.editing = false;
+      if (todo.title.trim().length == 0) {
+        todo.title = this.beforeEditCache
+      }
+      todo.editing = false
     },
 
     cancelEdit(todo) {
