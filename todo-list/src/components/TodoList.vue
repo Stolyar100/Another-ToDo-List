@@ -20,6 +20,7 @@
             v-else
             @blur="doneEdit(todo)"
             @keyup.enter="doneEdit(todo)"
+            v-focus
             class="todo-item-edit"
             type="text"
             v-model="todo.title"
@@ -84,6 +85,13 @@ export default {
 
     doneEdit(todo) {
       todo.editing = false;
+    }
+  },
+  directives: {
+    focus: {
+      inserted: function(el) {
+        el.focus();
+      }
     }
   }
 };
