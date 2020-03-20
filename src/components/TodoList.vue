@@ -48,9 +48,11 @@
           <button :class="{active: filter == 'completed' }" @click="filter = 'completed' ">Completed</button>
         </div>
 
-        <div>
-          <button v-if="showClearCompletedButton" @click="clearCompleted">Clear Comleted</button>
-        </div>
+        <transition name="fade">
+          <div>
+            <button v-if="showClearCompletedButton" @click="clearCompleted">Clear Comleted</button>
+          </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -105,7 +107,7 @@ export default {
     },
 
     showClearCompletedButton() {
-      return this.todos.filter(todo => todo.completed).length > 0 
+      return this.todos.filter(todo => todo.completed).length > 0;
     }
   },
   methods: {
@@ -152,7 +154,7 @@ export default {
     },
 
     clearCompleted() {
-      this.todos = this.todos.filter(todo => !todo.completed)
+      this.todos = this.todos.filter(todo => !todo.completed);
     }
   },
   directives: {
@@ -255,5 +257,12 @@ button:focus {
 
 .active {
   background: #40b883;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>
