@@ -48,11 +48,11 @@
           <button :class="{active: filter == 'completed' }" @click="filter = 'completed' ">Completed</button>
         </div>
 
-        <transition name="fade">
-          <div>
+        <div>
+          <transition name="fade">
             <button v-if="showClearCompletedButton" @click="clearCompleted">Clear Comleted</button>
-          </div>
-        </transition>
+          </transition>
+        </div>
       </div>
     </div>
   </div>
@@ -259,10 +259,13 @@ button:focus {
   background: #40b883;
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
 }
-.fade-enter, .fade-leave-to {
+
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>
