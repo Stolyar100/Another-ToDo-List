@@ -29,7 +29,7 @@
             v-model="todo.title"
           />
         </div>
-        <div class="remove-item" @click="this.removeTodo(index)>&times;</div>
+        <div class="remove-item" @click="this.removeTodo(index)">&times;</div>
       </div>
 
       <div class="extra-container">
@@ -49,7 +49,7 @@
         </div>
 
         <div>
-          <button v-if="showClearCompletedButton">Clear Comleted</button>
+          <button v-if="showClearCompletedButton" @click="clearCompleted">Clear Comleted</button>
         </div>
       </div>
     </div>
@@ -151,7 +151,7 @@ export default {
       this.todos.forEach(todo => (todo.completed = event.target.checked));
     },
 
-    clearComplete() {
+    clearCompleted() {
       this.todos = this.todos.filter(todo => !todo.completed)
     }
   },
