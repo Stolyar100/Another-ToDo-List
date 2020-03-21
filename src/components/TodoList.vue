@@ -9,29 +9,12 @@
       @keyup.enter="addTodo"
     />
     <div class="todo-list">
-      <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
-        <div v-for="(todo, index) in todosFiltered" :key="todo.id" class="todo-item">
-          <div class="todo-item-left">
-            <input type="checkbox" v-model="todo.completed" />
-            <div
-              v-if="!todo.editing"
-              @dblclick="editTodo(todo)"
-              class="todo-item-label"
-              :class="{ completed : todo.completed }"
-            >{{ todo.title }}</div>
-            <input
-              v-else
-              @blur="doneEdit(todo)"
-              @keyup.enter="doneEdit(todo)"
-              @keyup.esc="cancelEdit(todo)"
-              v-focus
-              class="todo-item-edit"
-              type="text"
-              v-model="todo.title"
-            />
-          </div>
-          <div class="remove-item" @click="this.removeTodo(index)">&times;</div>
-        </div>
+      <transition-group
+        name="fade"
+        enter-active-class="animated fadeInUp faster"
+        leave-active-class="animated fadeOutDown faster"
+      >
+        <todo-item v-for="(todo, index) in todosFiltered" :key="todo.id" :todo="todo" :index="index"></todo-item>
       </transition-group>
 
       <div class="extra-container">
@@ -61,9 +44,14 @@
 </template>
 
 <script>
+import TodoItem from "./TodoItem";
+
 export default {
   name: "todo-list",
   props: {},
+  components: {
+    TodoItem
+  },
 
   data: function() {
     return {
@@ -171,7 +159,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 @import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css);
 
 .todo-input {
@@ -190,6 +177,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .todo-list {
